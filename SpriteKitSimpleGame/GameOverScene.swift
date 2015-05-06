@@ -27,12 +27,16 @@ class GameOverScene: SKScene {
         var message = won ? "You Won! 😁" : "You Lose! 😕"
         
         // 3
-        let label = SKLabelNode(fontNamed: "Chalkduster")
-        label.text = message
-        label.fontSize = 60
-        label.fontColor = SKColor.blackColor()
-        label.position = CGPoint(x: size.width/2, y: size.height/2)
-        addChild(label)
+        let labell = SKLabelNode(fontNamed: "Chalkduster")
+        labell.text = message
+        labell.fontSize = 60
+        labell.fontColor = SKColor.blackColor()
+        labell.position = CGPoint(x: size.width/2, y: size.height/2)
+        addChild(labell)
+        
+        let button = SKSpriteNode(color: SKColor.yellowColor(), size: CGSize(width: 100, height: 40))
+        button.position = CGPoint(x: size.width/2 , y: size.height/2 - 100)
+        addChild(button)
         
         // 4
         runAction(SKAction.sequence([
@@ -44,11 +48,16 @@ class GameOverScene: SKScene {
                 self.view?.presentScene(scene, transition:reveal)
             }
             ]))
-        
     }
-    
     // 6
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+//        for touch: AnyObject in touches {
+//            let location = touch.locationInNode(self)
+//            if button
+//        }
+//    }
 }

@@ -18,6 +18,10 @@
 		1714A63D1AF806BF002F8C89 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1714A63B1AF806BF002F8C89 /* background-music-aac.caf */; };
 		1714A63E1AF806BF002F8C89 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1714A63C1AF806BF002F8C89 /* pew-pew-lei.caf */; };
 		1714A6401AF8080D002F8C89 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1714A63F1AF8080D002F8C89 /* GameOverScene.swift */; };
+		1732B1041AF82EC20012D963 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1732B1031AF82EC20012D963 /* GameScene.sks */; };
+		1732B1061AF83D1D0012D963 /* laser.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1732B1051AF83D1D0012D963 /* laser.mp3 */; };
+		1732B1081AF83D610012D963 /* laser2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1732B1071AF83D610012D963 /* laser2.mp3 */; };
+		1732B10A1AF83DF10012D963 /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1732B1091AF83DF10012D963 /* explosion.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,10 @@
 		1714A63B1AF806BF002F8C89 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		1714A63C1AF806BF002F8C89 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		1714A63F1AF8080D002F8C89 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		1732B1031AF82EC20012D963 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		1732B1051AF83D1D0012D963 /* laser.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser.mp3; sourceTree = "<group>"; };
+		1732B1071AF83D610012D963 /* laser2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser2.mp3; sourceTree = "<group>"; };
+		1732B1091AF83DF10012D963 /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +103,7 @@
 				1714A60A1AF7F403002F8C89 /* GameScene.swift */,
 				1714A60C1AF7F403002F8C89 /* GameViewController.swift */,
 				1714A63F1AF8080D002F8C89 /* GameOverScene.swift */,
+				1732B1031AF82EC20012D963 /* GameScene.sks */,
 				1714A60E1AF7F403002F8C89 /* Main.storyboard */,
 				1714A6131AF7F403002F8C89 /* LaunchScreen.xib */,
 				1714A6041AF7F403002F8C89 /* Supporting Files */,
@@ -131,6 +140,9 @@
 			isa = PBXGroup;
 			children = (
 				1714A63B1AF806BF002F8C89 /* background-music-aac.caf */,
+				1732B1051AF83D1D0012D963 /* laser.mp3 */,
+				1732B1071AF83D610012D963 /* laser2.mp3 */,
+				1732B1091AF83DF10012D963 /* explosion.mp3 */,
 				1714A63C1AF806BF002F8C89 /* pew-pew-lei.caf */,
 			);
 			path = Sounds;
@@ -185,6 +197,11 @@
 				TargetAttributes = {
 					1714A6001AF7F403002F8C89 = {
 						CreatedOnToolsVersion = 6.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					1714A6191AF7F403002F8C89 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -216,10 +233,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1732B1061AF83D1D0012D963 /* laser.mp3 in Resources */,
+				1732B1081AF83D610012D963 /* laser2.mp3 in Resources */,
 				1714A63D1AF806BF002F8C89 /* background-music-aac.caf in Resources */,
+				1732B10A1AF83DF10012D963 /* explosion.mp3 in Resources */,
 				1714A6151AF7F403002F8C89 /* LaunchScreen.xib in Resources */,
 				1714A62D1AF7F6F5002F8C89 /* Images.xcassets in Resources */,
 				1714A63E1AF806BF002F8C89 /* pew-pew-lei.caf in Resources */,
+				1732B1041AF82EC20012D963 /* GameScene.sks in Resources */,
 				1714A6101AF7F403002F8C89 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +458,7 @@
 				1714A6261AF7F403002F8C89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1714A6271AF7F403002F8C89 /* Build configuration list for PBXNativeTarget "SpriteKitSimpleGameTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +467,7 @@
 				1714A6291AF7F403002F8C89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

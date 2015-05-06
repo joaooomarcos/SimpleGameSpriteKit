@@ -11,8 +11,10 @@ import AVFoundation
 
 var backgroundMusicPlayer: AVAudioPlayer!
 var monstersDestroyed = 0
+var highScore = 0
 
 func playBackgroundMusic(filename: String) {
+    
     let url = NSBundle.mainBundle().URLForResource(
         filename, withExtension: nil)
     if (url == nil) {
@@ -74,6 +76,9 @@ extension CGPoint {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var labelScore = SKLabelNode()
+    var labelHighScore = SKLabelNode()
+    
     // Example of Sprite
     let player = SKSpriteNode(imageNamed: "Iron-Man")
     
@@ -99,6 +104,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
+        
+        monstersDestroyed = 0
+        highScore = NSUserDefaults.standardUserDefaults().integerForKey("HighScore")
+        
+        //if NSUserDefaults.integerForKey("HighScore") == 0 {
+            //labelHighScore.text = "High Score = 0"
+        //} else {
+            labelHighScore.text = "High Score = \(highScore)"
+        //}
+        labelHighScore.fontSize = 15
+        labelHighScore.fontColor = SKColor.blackColor()
+        labelHighScore.position = CGPoint(x: 70, y: size.height - 20)
+        addChild(labelHighScore)
+        
+        labelScore.text = "Score = \(monstersDestroyed)"
+        labelScore.fontSize = 25
+        labelScore.fontColor = SKColor.blackColor()
+        labelScore.position = CGPoint(x: size.width/2, y: size.height - 40)
+        addChild(labelScore)
     }
     
     func random() -> CGFloat {
@@ -128,9 +152,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Create the actions
         let actionMove = SKAction.moveTo(CGPoint(x: -monster.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
         let actionMoveDone = SKAction.removeFromParent()
+        
         let loseAction = SKAction.runBlock() {
             let reveal = SKTransition.flipHorizontalWithDuration(0.5)
             let gameOverScene = GameOverScene(size: self.size, won: false)
+            if monstersDestroyed >  highScore {
+            NSUserDefaults.standardUserDefaults().setInteger(monstersDestroyed, forKey: "HighScore")
+            }
             self.view?.presentScene(gameOverScene, transition: reveal)
         }
         monster.runAction(SKAction.sequence([actionMove, loseAction, actionMoveDone]))
@@ -152,7 +180,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Set up initial location of projectile
         let projectile = SKSpriteNode(imageNamed: "blue")
-        projectile.position = player.position
+        projectile.position = CGPoint(x: player.position.x+27, y: player.position.y+32)
         
         // Determine offset of location to projectile
         let offset = touchLocation - projectile.position
@@ -184,19 +212,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         projectile.physicsBody?.collisionBitMask = PhysicsCategory.None
         projectile.physicsBody?.usesPreciseCollisionDetection = true
         
-        runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
+        runAction(SKAction.playSoundFileNamed("laser.mp3", waitForCompletion: false))
     }
     
     func projectileDidCollideWithMonster(projectile:SKSpriteNode, monster:SKSpriteNode) {
+        runAction(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
         println("Hit")
         projectile.removeFromParent()
         monster.removeFromParent()
+        
         monstersDestroyed++
-        if (monstersDestroyed > 15) {
-            let reveal = SKTransition.flipHorizontalWithDuration(0.5)
-            let gameOverScene = GameOverScene(size: self.size, won: true)
-            self.view?.presentScene(gameOverScene, transition: reveal)
-        }
+        labelScore.text = "Score = \(monstersDestroyed)"
+        
+//        if (monstersDestroyed > 15) {
+//            let reveal = SKTransition.flipHorizontalWithDuration(0.5)
+//            let gameOverScene = GameOverScene(size: self.size, won: true)
+//            self.view?.presentScene(gameOverScene, transition: reveal)
+//        }
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
